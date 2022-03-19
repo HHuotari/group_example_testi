@@ -9,7 +9,7 @@ router.get('/:id?',
       if (err) {
         response.json(err);
       } else {
-        response.json(dbResult);
+        response.json(dbResult[0]);
       }
     });
   } else {
@@ -52,6 +52,17 @@ router.put('/:id',
 function(request, response) {
   student.update(request.params.id, request.body, function(err, dbResult) {
     if (err) {
+      response.json(err);
+    } else {
+      response.json(dbResult);
+    }
+  });
+});
+
+router.get('/grades/:username', function(request,response){
+  student.getGrades(request.params.username, function(err,dbResult)
+  {
+    if(err) {
       response.json(err);
     } else {
       response.json(dbResult);
