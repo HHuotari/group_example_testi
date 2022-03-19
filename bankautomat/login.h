@@ -1,9 +1,14 @@
 #ifndef LOGIN_H
 #define LOGIN_H
 
+#include "myurl.h"
 #include "studentmain.h"
+#include <QDebug>
 
 #include <QDialog>
+#include <QtNetwork>
+#include <QNetworkAccessManager>
+#include <QJsonDocument>
 
 namespace Ui {
 class Login;
@@ -19,6 +24,8 @@ public:
 
 private slots:
     void on_btnLogin_clicked();
+    void loginSlot(QNetworkReply *reply);
+
 
 private:
     Ui::Login *ui;
@@ -26,6 +33,13 @@ private:
     QString password;
     QString id;
     StudentMain *objectStudentMain;
+    MyUrl *objectMyUrl;
+    QString base_url;
+
+    QNetworkAccessManager *loginManager;
+    QNetworkReply *reply;
+    QByteArray response_data;
+    QByteArray token;
 };
 
 #endif // LOGIN_H
